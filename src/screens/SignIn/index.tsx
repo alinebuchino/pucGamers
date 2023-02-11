@@ -7,8 +7,6 @@ export function SignIn() {
 
     return (
         <View style={styles.container}>
-            <StatusBar barStyle={'light-content'} />
-
             <Image
                 source={IllustrationImg}
                 style={styles.image}
@@ -27,9 +25,9 @@ export function SignIn() {
                     favoritos com seus amigos
                 </Text>
 
-                <ButtonIcon 
-                title={"Entrar com Discord"}
-                activeOpacity={0.7}
+                <ButtonIcon
+                    title={"Entrar com Discord"}
+                    activeOpacity={0.7}
                 />
             </View>
         </View>
