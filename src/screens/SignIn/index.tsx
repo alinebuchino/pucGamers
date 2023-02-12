@@ -1,8 +1,8 @@
 import { Text, View, Image } from 'react-native';
 import { styles } from './styles';
 import IllustrationImg from '../../assets/illustration.png';
-import ButtonIcon from '../../components/ButtonIcon';
-import {useNavigation} from '@react-navigation/native'
+import { ButtonIcon } from '../../components/ButtonIcon';
+import { useNavigation } from '@react-navigation/native'
 
 export function SignIn() {
 

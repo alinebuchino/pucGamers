@@ -20,31 +20,33 @@ export function Category({
   checked = false,
   hasCheckBox = false,
   ...rest
-}: Props) {
+}: Props){
   const { secondary40, secondary50, secondary70, secondary85 } = theme.colors;
 
-  return (
+  return(
     <RectButton {...rest}>
       <LinearGradient
         style={styles.container}
         colors={[secondary50, secondary70]}
       >
-        <LinearGradient
+        <LinearGradient 
           style={[styles.content, { opacity: checked ? 1 : 0.5 }]}
-          colors={[checked ? secondary85 : secondary50, secondary40]}
+          colors={[ checked ? secondary85 : secondary50, secondary40 ]}
         >
-          
-          <View style={
-            checked ? styles.checked : styles.check
-          } />
+          {
+            hasCheckBox &&
+            <View style={
+              checked ? styles.checked : styles.check
+            }/>
+          }
 
-          <Icon
-            width={48}
-            height={48}
+          <Icon 
+              width={48} 
+              height={48}
           />
 
           <Text style={styles.title}>
-            {title}
+            { title }
           </Text>
         </LinearGradient>
       </LinearGradient>
