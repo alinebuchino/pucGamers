@@ -17,11 +17,11 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.title700,
     color: theme.colors.heading,
     fontSize: 18,
-    marginBottom: 4,
+    marginBottom: 8,
   },
   type: {
     fontFamily: theme.fonts.text400,
     color: theme.colors.highlight,
-    fontSize: 13,
+    fontSize: 13
   }
 });
