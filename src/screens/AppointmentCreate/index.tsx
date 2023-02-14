@@ -182,6 +182,8 @@ export function AppointmentCreate() {
             </View>
 
             <TextArea
+              placeholder="Digite a descrição da partida" 
+              placeholderTextColor={theme.colors.secondary30} 
               multiline
               maxLength={100}
               numberOfLines={5}
