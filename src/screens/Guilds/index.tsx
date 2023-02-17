@@ -7,36 +7,20 @@ import { Load } from '../../components/Load';
 import { ListDivider } from '../../components/ListDivider';
 
 import { styles } from './styles';
-/* import { api } from '../../services/api'; */
+import { api } from '../../services/apis';
 
 type Props = {
   handleGuildSelect: (guild: GuildProps) => void;
 }
 
 export function Guilds({ handleGuildSelect }: Props){
-
-const guilds = [
-    {
-        id: '1',
-        name: 'Lendários',
-        icon: null,
-        owner: false
-    },
-    {
-        id: '2',
-        name: 'Lendários Teste',
-        icon: null,
-        owner: false
-    }
-]
-
-  /* const [guilds, setGuilds] = useState<GuildProps[]>([]); */
+  const [guilds, setGuilds] = useState<GuildProps[]>([]);
   const [loading, setLoading] = useState(true);
 
   async function fetchGuilds(){
-    /* const response = await api.get('/users/@me/guilds');
+    const response = await api.get('/users/@me/guilds');
 
-    setGuilds(response.data); */
+    setGuilds(response.data);
     setLoading(false);
   }
 
