@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { RectButton } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-/* import uuid from 'react-native-uuid'; */
+import uuid from 'react-native-uuid';
 
 import {
   Text,
@@ -40,7 +40,8 @@ export function AppointmentCreate(){
   const [minute, setMinute] = useState('');
   const [description, setDescription] = useState('');
 
-  const navigation = useNavigation();
+  /* const navigation = useNavigation(); */
+  const navigation = useNavigation<any>();
 
   function handleOpenGuilds(){
     setOpenGuildsModal(true);
@@ -61,7 +62,7 @@ export function AppointmentCreate(){
 
   async function handleSave() {
     const newAppointment = {
-     /*  id: uuid.v4(), */
+      id: uuid.v4(),
       guild,
       category,
       date: `${day}/${month} às ${hour}:${minute}h`,
