@@ -8,9 +8,10 @@ import { styles } from './styles';
 import PlayerSvg from '../../assets/player.svg';
 import CalendarSvg from '../../assets/calendar.svg';
 
-import { GuildProps } from '../Guild'
+import { GuildProps } from '../Guild';
 import { GuildIcon } from '../GuildIcon';
 import { categories } from '../../utils/categories';
+
 
 export type AppointmentProps = {
   id: string;
@@ -46,7 +47,7 @@ export function Appointment({ data, ...rest }: Props) {
             </Text>
 
             <Text style={styles.category}>
-              { category.title }
+             {/*  { category.title } */}
             </Text>
           </View>
 
