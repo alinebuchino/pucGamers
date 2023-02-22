@@ -1,30 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
-import { Avatar } from "../Avatar";
+import { RectButton } from "react-native-gesture-handler";
+
 import { styles } from "./styles";
 
+import { Avatar } from "../Avatar";
+import { useAuth } from "../../hooks/auth";
+import { Button } from "../../components/Button";
+import { ModalView } from "../../components/ModalView";
+
 export function Profile() {
-    return (
-        <View style={styles.container}>
+  const { user, singOut: signOut } = useAuth();
+  const [openGuildModal, setOpenGuildModal] = useState(false);
 
-            <Avatar urlImage="https://github.com/alinebuchino.png"/>
+  function handleOpenModal() {
+    setOpenGuildModal(true);
+  }
 
-            <View>
-                <View style={styles.user}>
-                    <Text style={styles.greeting}>
-                        Olá,
-                    </Text>
+  function handleCloseModal() {
+    setOpenGuildModal(false);
+  }
 
-                    <Text style={styles.username}>
-                        Aline
-                    </Text>
-                </View>
+  function handleLogOut() {
+    signOut();
+  }
 
-                <Text style={styles.message}>
-                    Hoje é dia de vitória
-                </Text>
-            </View>
+  return (
+    <>
+      <View style={styles.container}>
+        <RectButton onPress={handleOpenModal}>
+          <Avatar urlImage={user.avatar} />
+        </RectButton>
+        <View>
+          <View style={styles.user}>
+            <Text style={styles.greeting}>Olá,</Text>
+            <Text style={styles.username}>{user.firstName}</Text>
+          </View>
 
+          <Text style={styles.message}>Hoje é dia de vitória</Text>
         </View>
-    )
+      </View>
+
+      <ModalView visible={openGuildModal} closeModal={handleCloseModal} logout>
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalMessage}>Quer mesmo sair?</Text>
+          <View style={styles.modalContent}>
+            <Button
+              title={"Não"}
+              logout
+              non_filled
+              onPress={handleCloseModal}
+            />
+            <Button title={"Sim"} onPress={handleLogOut} logout />
+          </View>
+        </View>
+      </ModalView>
+    </>
+  );
 }
