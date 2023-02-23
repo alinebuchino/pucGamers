@@ -6,7 +6,7 @@ import { theme } from "../global/styles/theme";
 import { Home } from "../screens/Home";
 import { AppointmentDetails } from "../screens/AppointmentDetails";
 import { AppointmentCreate } from "../screens/AppointmentCreate";
-import { DropDatabaseSuccess } from "../screens/DropDatabaseSuccess";
+import { DropDataBaseSuccess } from "../screens/DropDataBaseSuccess";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -23,7 +23,7 @@ export function AppRoutes() {
       <Screen name={"Home"} component={Home} />
       <Screen name={"AppointmentDetails"} component={AppointmentDetails} />
       <Screen name={"AppointmentCreate"} component={AppointmentCreate} />
-      <Screen name={"DropDatabaseSuccess"} component={DropDatabaseSuccess} />
+      <Screen name={"DropDataBaseSuccess"} component={DropDataBaseSuccess} />
     </Navigator>
   );
 }

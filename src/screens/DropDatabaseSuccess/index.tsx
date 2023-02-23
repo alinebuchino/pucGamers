@@ -6,7 +6,7 @@ import { styles } from "./styles";
 
 import { Button } from "../../components/Button";
 
-export function DropDatabaseSuccess() {
+export function DropDataBaseSuccess() {
   const navigation = useNavigation();
 
   function handleGoBack() {
@@ -16,7 +16,7 @@ export function DropDatabaseSuccess() {
     <View style={styles.container}>
       <Text style={styles.title}>Sucesso!</Text>
       <Text style={styles.success}>
-        Todas as partidas foram apagadas com sucesso!
+        Todas as partidas foram apagadas com êxito!
       </Text>
       <View style={styles.buttonConfirm}>
         <Button title={"Voltar"} onPress={handleGoBack} />

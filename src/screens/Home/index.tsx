@@ -68,7 +68,7 @@ export function Home() {
         text: "Quero sim",
         onPress: () => {
           deleteAppointments();
-          navigation.navigate("DropDatabaseSuccess");
+          navigation.navigate("DropDataBaseSuccess");
         },
       },
     ]);
