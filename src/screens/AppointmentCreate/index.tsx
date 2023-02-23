@@ -1,104 +1,159 @@
-import React, { useState } from 'react';
-import { Feather } from '@expo/vector-icons';
-import { RectButton } from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import uuid from 'react-native-uuid';
-
+import React, { useState } from "react";
 import {
-  Text,
   View,
-  Platform,
+  Text,
   ScrollView,
   KeyboardAvoidingView,
-} from 'react-native';
+  Platform,
+  Alert,
+} from "react-native";
+import { RectButton } from "react-native-gesture-handler";
+/* lib para ícones */
+import { Feather } from "@expo/vector-icons";
+import { parseISO, isAfter, addHours } from "date-fns";
 
-import { COLLECTION_APPOINTMENTS } from '../../configs/database';
-import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import uuid from "react-native-uuid";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLLECTION_APPOINTMENTS } from "../../configs/database";
+import { useNavigation } from "@react-navigation/native";
 
-import { CategorySelect } from '../../components/CategorySelect';
-import { ModalView } from '../../components/ModalView';
-import { Background } from '../../components/Background';
-import { SmallInput } from '../../components/SmallInput';
-import { GuildIcon } from '../../components/GuildIcon';
-import { TextArea } from '../../components/TextArea';
-import { GuildProps } from '../../components/Guild';
-import { Header } from '../../components/Header';
-import { Button } from '../../components/Button';
-import { Guilds } from '../Guilds';
+import { styles } from "./styles";
+import { theme } from "../../global/styles/theme";
 
+import { Header } from "../../components/Header";
+import { CategorySelect } from "../../components/CategorySelect";
+import { GuildIcon } from "../../components/GuildIcon";
+import { SmallInput } from "../../components/SmallInput";
+import { TextArea } from "../../components/TextArea";
+import { Button } from "../../components/Button";
+import { ModalView } from "../../components/ModalView";
+import { Guilds } from "../Guilds";
+import { GuildProps } from "../../components/Guild";
 
-export function AppointmentCreate(){
-  const [category, setCategory] = useState('');
-  const [openGuildsModa, setOpenGuildsModal] = useState(false);
+export function AppointmentCreate() {
+  const [category, setCategory] = useState("");
+  const [openGuildModal, setOpenGuildModal] = useState(false);
   const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
 
-  const [day, setDay] = useState('');
-  const [month, setMonth] = useState('');
-  const [hour, setHour] = useState('');
-  const [minute, setMinute] = useState('');
-  const [description, setDescription] = useState('');
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [hour, setHour] = useState("");
+  const [minute, setMinute] = useState("");
+  const [description, setDescription] = useState("");
 
-  /* const navigation = useNavigation(); */
   const navigation = useNavigation<any>();
 
-  function handleOpenGuilds(){
-    setOpenGuildsModal(true);
+  function handleOpenGuilds() {
+    setOpenGuildModal(true);
   }
 
-  function handleCloseGuilds(){
-    setOpenGuildsModal(false);
+  function handleCloseGuilds() {
+    setOpenGuildModal(false);
   }
 
-  function handleGuildSelect(guildSelect: GuildProps){
-    setGuild(guildSelect);
-    setOpenGuildsModal(false);
+  function handleGuildSelect(guildSelected: GuildProps) {
+    setGuild(guildSelected);
+    setOpenGuildModal(false);
   }
 
   function handleCategorySelect(categoryId: string) {
     setCategory(categoryId);
-  } 
-
-  async function handleSave() {
-    const newAppointment = {
-      id: uuid.v4(),
-      guild,
-      category,
-      date: `${day}/${month} às ${hour}:${minute}h`,
-      description
-    };
-
-    const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
-    const appointments = storage ? JSON.parse(storage) : [];
-
-    await AsyncStorage.setItem(
-      COLLECTION_APPOINTMENTS,
-      JSON.stringify([...appointments, newAppointment])
-    );
-
-    navigation.navigate('Home');    
   }
 
+  async function handleSave() {
+    const dateTimeNotification = `2023-${month}-${day} ${hour}:${minute}:00`;
+    const parsedDate = addHours(parseISO(dateTimeNotification), -3);
+
+    const future = isAfter(parsedDate, addHours(new Date(), -3));
+
+    if (!future) {
+      Alert.alert(
+        "Dados inválidos!",
+        "Informe uma data e horário válidos.",
+        [
+          {
+            text: "OK",
+          },
+        ]
+      );
+    } else {
+      const newAppointment = {
+        id: uuid.v4(),
+        guild,
+        category,
+        date: `${day}/${month} às ${hour}:${minute}`,
+        description,
+        dateTimeNotification: parsedDate,
+      };
+
+      if (
+        !newAppointment.category
+      ) {
+        Alert.alert(
+          "Campos incompletos!",
+          "Selecione a categoria.",
+          [
+            {
+              text: "OK",
+            },
+          ]
+        );
+      } else if(
+        !newAppointment.guild.name
+      ) {
+          Alert.alert(
+            "Campos incompletos!",
+          "Selecione o servidor.",
+          [
+            {
+              text: "OK",
+            },
+          ]
+        );
+      } else if(
+        !newAppointment.description
+      ) {
+          Alert.alert(
+          "Campos incompletos!",
+          "Preencha a descrição da partida.",
+          [
+            {
+              text: "OK",
+            },
+          ]
+        );
+      }
+
+      else {
+        const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
+
+        const appointments = storage ? JSON.parse(storage) : [];
+
+        await AsyncStorage.setItem(
+          COLLECTION_APPOINTMENTS,
+          JSON.stringify([...appointments, newAppointment])
+        );
+
+        navigation.navigate("Home");
+      }
+    }
+  }
+
+  /* a Scroll View tbm permite a rolagem da tela toda (pra dispositivos menores) */
   return (
-    <KeyboardAvoidingView 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height' }
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <Background>
-        <ScrollView>  
-          <Header 
-            title="Agendar partida"
-          />
+      <Header title={"Agendar partida"} />
 
-          <Text style={[
-            styles.label, 
-            { marginLeft: 24, marginTop: 36, marginBottom: 18 }]}
-          >
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={[styles.label, { marginLeft: 24, marginTop: 32 }]}>
             Categoria
           </Text>
 
-          <CategorySelect 
+          <CategorySelect
             hasCheckBox
             setCategory={handleCategorySelect}
             categorySelected={category}
@@ -107,104 +162,70 @@ export function AppointmentCreate(){
           <View style={styles.form}>
             <RectButton onPress={handleOpenGuilds}>
               <View style={styles.select}>
-                {
-                  guild.icon 
-                  ? <GuildIcon guildId={guild.id} iconId={guild.icon} /> 
-                  : <View style={styles.image} />
-                }
+                {guild.icon ? (
+                  <GuildIcon guildId={guild.id} iconId={guild.icon} />
+                ) : (
+                  <View style={styles.image} />
+                )}
 
                 <View style={styles.selectBody}>
                   <Text style={styles.label}>
-                    { 
-                      guild.name 
-                      ? guild.name 
-                      : 'Selecione um servidor' 
+                    {
+                      guild.name
+                        ? guild.name
+                        : 'Selecione um servidor'
                     }
                   </Text>
                 </View>
 
-                <Feather 
-                  name="chevron-right"
+                <Feather
+                  name={"chevron-right"}
                   color={theme.colors.heading}
                   size={18}
                 />
               </View>
             </RectButton>
-            
+
             <View style={styles.field}>
               <View>
-                <Text style={[styles.label, { marginBottom: 12 } ]}>
-                  Dia e mês
-                </Text>
-
+                <Text style={styles.label}>Dia e mês</Text>
                 <View style={styles.column}>
-                  <SmallInput 
-                    maxLength={2} 
-                    onChangeText={setDay}
-                  />
-                  <Text style={styles.divider}>
-                    /
-                  </Text>
-                  <SmallInput 
-                    maxLength={2} 
-                    onChangeText={setMonth}
-                  />
+                  <SmallInput maxLength={2} onChangeText={setDay} />
+                  <Text style={styles.divider}>/</Text>
+                  <SmallInput maxLength={2} onChangeText={setMonth} />
                 </View>
               </View>
 
               <View>
-                <Text style={[styles.label, { marginBottom: 12 } ]}>
-                  Hora e minuto
-                </Text>
-
+                <Text style={styles.label}>Hora e minuto</Text>
                 <View style={styles.column}>
-                  <SmallInput 
-                    maxLength={2} 
-                    onChangeText={setHour}
-                  />
-                  <Text style={styles.divider}>
-                    :
-                  </Text>
-                  <SmallInput 
-                    maxLength={2} 
-                    onChangeText={setMinute}
-                  />
+                  <SmallInput maxLength={2} onChangeText={setHour} />
+                  <Text style={styles.divider}>:</Text>
+                  <SmallInput maxLength={2} onChangeText={setMinute} />
                 </View>
-              </View>           
+              </View>
             </View>
-
-            <View style={[styles.field, { marginBottom: 12 }]}>
-              <Text style={styles.label}>
-                Descrição
-              </Text>
-
-              <Text style={styles.caracteresLimit}>
-                Max 100 caracteres
-              </Text>
+            <View style={styles.field}>
+              <Text style={styles.label}>Descrição</Text>
+              <Text style={styles.caracteresLimit}>Max. 100 caracteres</Text>
             </View>
-
-            <TextArea 
+            <TextArea
               multiline
               maxLength={100}
               numberOfLines={5}
               autoCorrect={false}
               onChangeText={setDescription}
             />
-
-            <View style={styles.footer}>
-              <Button 
-                title="Agendar" 
-                onPress={handleSave}
-              />
-            </View>
           </View>
-        </ScrollView>
-      </Background>
 
-      <ModalView visible={openGuildsModa} closeModal={handleCloseGuilds}>
-        <Guilds handleGuildSelect={handleGuildSelect}/>
+          <View style={styles.footer}>
+            <Button title={"Agendar"} onPress={handleSave} />
+          </View>
+        </View>
+      </ScrollView>
+      <ModalView visible={openGuildModal} closeModal={handleCloseGuilds}>
+        <Guilds handleGuildSelect={handleGuildSelect} />
       </ModalView>
-      
     </KeyboardAvoidingView>
   );
 }
