@@ -19,6 +19,7 @@ export type AppointmentProps = {
   category: string;
   date: string;
   description: string;
+  dateTimeNotification: Date;
 }
 
 type Props = RectButtonProps & {
