@@ -56,11 +56,11 @@ export const styles = StyleSheet.create({
   caracteresLimit: {
     fontFamily: theme.fonts.text400,
     fontSize: 13,
-    color: theme.colors.highlight
+    color: theme.colors.highlight,
   },
   footer: {
-    paddingHorizontal: 24,
-    marginVertical: 22,
-    marginBottom: 56,
+    paddingHorizontal: 25,
+    marginVertical: 30,
+    marginRight: 20
   }
 });

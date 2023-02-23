@@ -149,7 +149,7 @@ export function AppointmentCreate() {
 
       <ScrollView>
         <View style={styles.container}>
-          <Text style={[styles.label, { marginLeft: 24, marginTop: 32 }]}>
+          <Text style={[styles.label, { marginLeft: 24, marginTop: 32, marginBottom: 12 }]}>
             Categoria
           </Text>
 
@@ -188,7 +188,7 @@ export function AppointmentCreate() {
 
             <View style={styles.field}>
               <View>
-                <Text style={styles.label}>Dia e mês</Text>
+                <Text style={[styles.label, { marginBottom: 12 }]}>Dia e mês</Text>
                 <View style={styles.column}>
                   <SmallInput maxLength={2} onChangeText={setDay} />
                   <Text style={styles.divider}>/</Text>
@@ -197,7 +197,7 @@ export function AppointmentCreate() {
               </View>
 
               <View>
-                <Text style={styles.label}>Hora e minuto</Text>
+                <Text style={[styles.label, { marginBottom: 12 }]}>Hora e minuto</Text>
                 <View style={styles.column}>
                   <SmallInput maxLength={2} onChangeText={setHour} />
                   <Text style={styles.divider}>:</Text>
@@ -206,7 +206,7 @@ export function AppointmentCreate() {
               </View>
             </View>
             <View style={styles.field}>
-              <Text style={styles.label}>Descrição</Text>
+              <Text style={[styles.label, { marginBottom: 12 }]}>Descrição</Text>
               <Text style={styles.caracteresLimit}>Max. 100 caracteres</Text>
             </View>
             <TextArea
