@@ -50,10 +50,6 @@ As seguintes tecnologias e ferramentas estão sendo utilizadas neste projeto:
 ## :iphone: Demonstração
 Abaixo é possível encontrar uma demonstração das telas e funcionalidades do projeto desenvolvido, com a alteração de cores e algumas imagens, mas se quiser 
 conferir o layout original das telas, é só acessar [este link](https://www.figma.com/file/3oUtbd1Wq8RVgr7oUilrFC/PucGamers?node-id=58913%3A83&t=Mk3XKIJrl8xTSzRb-1) para o projeto no Figma.
-  
-<!-- <p align="center">
-  <img alt="Demonstração" src=".github/demo-com-melhorias.gif" width="230px" />
-</p> -->
 
 <span id="requisitos">
 
