@@ -6,22 +6,41 @@ O aplicativo "PucGamers" tem como objetivo ajudar na organização de partidas e
 ### :hammer_and_wrench: Tecnologias
 As seguintes tecnologias e ferramentas estão sendo utilizadas neste projeto:
 
-- [Figma](http://www.figma.com/)
-- [React Native](https://reactnative.dev/)
-- [Expo](https://expo.io/)
-- [TypeScript](https://www.typescriptlang.org/)
+-   [ ] React Native
+-   [ ] Typescript
+-   [ ] Expo
+-   [ ] Context API
+-   [ ] Async Storage
+-   [ ] Vector Icons
+-   [ ] React Native Svg e Svg Transform
+-   [ ] Axios
+-   [ ] Gradient colors
+-   [ ] OAuth2 Discord 
+-   [ ] Expo Google Fonts
+-   [ ] React Navigation Stack
+-   [ ] React Native Gesture Handler
+-   [ ] Expo Authentication
+-   [ ] React Native Share
+-   [ ] Deep Link
+
+## :hammer_and_wrench: Features 
+
+-   [X] Autenticação Social OAuth2 com servidor do Discord.
+-   [X] Obtém perfil do usuário cadastro no Discord (username e avatar);
+-   [X] Lista os servidores do Discord que o usuário faz parte;
+-   [X] Permite realizar o agendamento de partidas;
+-   [X] Permite filtrar as partidas por categoria;
+-   [X] Exibe se a partida foi agendada em um servidor próprio (anfitrião) ou em servidores de outros (convidado);
+-   [X] Compartilha o convite para ingressar no servidor do usuário;
+-   [X] Permite redirecionar o usuário para o seu próprio servidor;
+-   [X] Disponibiliza a função de Logout.
   
-### Funcionalidades
-- [X] Login com autenticação utilizando o Discord
-- [X] Listagem de partidas agendadas
-- [X] Agendamento de novas partidas
-  - [X] ADICIONAL: Verificação se todos os campos para agendar a partida estão preenchidos
-  - [X] ADICIONAL: Verificação se a data e hora escolhida são válidas (apenas datas futuras)
+### Features Adicionais
+- [X] ADICIONAL: Verificação se todos os campos para agendar a partida estão preenchidos
+- [X] ADICIONAL: Verificação se a data e hora escolhida são válidas (apenas datas futuras)
 - [X] ADICIONAL: Exclusão de todas as partidas realizadas
-- [X] Visualização de detalhes da partida
-  - [X] ADICIONAL: Lembrete de quando a partida irá ocorrer, ou se já ocorreu
-  - [X] ADICIONAL: Tratamento de erro caso o servidor não tenha widget ativado
-- [X] Compartilhamento de link para servidor
+- [X] ADICIONAL: Lembrete de quando a partida irá ocorrer, ou se já ocorreu
+- [X] ADICIONAL: Tratamento de erro caso o servidor não tenha widget ativado
 - [X] ADICIONAL: Modal de "logout"
 
 - [ ] Outras ideias: Edição e exclusão de partida, deixar o botão de "entrar na partida" desabilitado até o horário agendado, gerar notificação 10 minutos antes do início da partida...
