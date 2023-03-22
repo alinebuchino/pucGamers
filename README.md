@@ -6,22 +6,22 @@ O aplicativo "PucGamers" tem como objetivo ajudar na organização de partidas e
 ### :hammer_and_wrench: Tecnologias
 As seguintes tecnologias e ferramentas estão sendo utilizadas neste projeto:
 
--   [ ] React Native
--   [ ] Typescript
--   [ ] Expo
--   [ ] Context API
--   [ ] Async Storage
--   [ ] Vector Icons
--   [ ] React Native Svg e Svg Transform
--   [ ] Axios
--   [ ] Gradient colors
--   [ ] OAuth2 Discord 
--   [ ] Expo Google Fonts
--   [ ] React Navigation Stack
--   [ ] React Native Gesture Handler
--   [ ] Expo Authentication
--   [ ] React Native Share
--   [ ] Deep Link
+-   [X] React Native
+-   [X] Typescript
+-   [X] Expo
+-   [X] Context API
+-   [X] Async Storage
+-   [X] Vector Icons
+-   [X] React Native Svg e Svg Transform
+-   [X] Axios
+-   [X] Gradient colors
+-   [X] OAuth2 Discord 
+-   [X] Expo Google Fonts
+-   [X] React Navigation Stack
+-   [X] React Native Gesture Handler
+-   [X] Expo Authentication
+-   [X] React Native Share
+-   [X] Deep Link
 
 ## :hammer_and_wrench: Features 
 
@@ -36,12 +36,12 @@ As seguintes tecnologias e ferramentas estão sendo utilizadas neste projeto:
 -   [X] Disponibiliza a função de Logout.
   
 ### Features Adicionais
-- [X] ADICIONAL: Verificação se todos os campos para agendar a partida estão preenchidos
-- [X] ADICIONAL: Verificação se a data e hora escolhida são válidas (apenas datas futuras)
-- [X] ADICIONAL: Exclusão de todas as partidas realizadas
-- [X] ADICIONAL: Lembrete de quando a partida irá ocorrer, ou se já ocorreu
-- [X] ADICIONAL: Tratamento de erro caso o servidor não tenha widget ativado
-- [X] ADICIONAL: Modal de "logout"
+- [X] Verificação se todos os campos para agendar a partida estão preenchidos
+- [X] Verificação se a data e hora escolhida são válidas (apenas datas futuras)
+- [X] Exclusão de todas as partidas realizadas
+- [X] Lembrete de quando a partida irá ocorrer, ou se já ocorreu
+- [X] Tratamento de erro caso o servidor não tenha widget ativado
+- [X] Modal de "logout"
 
 - [ ] Outras ideias: Edição e exclusão de partida, deixar o botão de "entrar na partida" desabilitado até o horário agendado, gerar notificação 10 minutos antes do início da partida...
 
